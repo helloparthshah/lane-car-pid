@@ -10,6 +10,10 @@ class Road {
         this.speed = speed;
     }
 
+    getLaneWidth() {
+        return width / this.nLanes;
+    }
+
     getLaneX() {
         return this.currentLane * width / this.nLanes + width / this.nLanes / 2;
     }
@@ -29,14 +33,15 @@ class Road {
             strokeWeight(1);
             stroke(255);
             line(i * laneWidth, 0, i * laneWidth, height);
-            for (let j = this.phase % 20; j < height; j += 20) {
+            let nSections = 15;
+            for (let j = this.phase % (height / nSections); j < height; j += (height / nSections)) {
                 if (i == this.currentLane) {
                     stroke(0, 0, 255);
                 } else {
                     stroke(255);
                 }
                 strokeWeight(3);
-                line(i * laneWidth + laneWidth / 2, j, i * laneWidth + laneWidth / 2, j + 5);
+                line(i * laneWidth + laneWidth / 2, j, i * laneWidth + laneWidth / 2, j + (height / nSections / 2));
             }
         }
         this.update();
