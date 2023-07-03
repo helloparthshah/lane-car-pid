@@ -10,7 +10,7 @@ class Car {
         this.lane = 0;
         this.speed = speed;
 
-        this.lookahead = 100;
+        this.lookahead = height / 2;
     }
 
     changePid(Kp, Ki, Kd) {
@@ -21,7 +21,7 @@ class Car {
 
     setSpeed(speed) {
         this.speed = speed;
-        this.lookahead = this.height * speed / 6;
+        this.lookahead = this.height * speed / 6 + this.height;
     }
 
     setLane(laneX) {
@@ -31,6 +31,7 @@ class Car {
     update() {
         // use the pid controller to turn the car to the center of the lane
         // remember angles are measured from the y axis
+        strokeWeight(2);
         const targetAngle = -atan2(this.lookahead, this.lane - this.x);
         const currentAngle = atan2(sin(this.angle), cos(this.angle)) - PI / 2;
         stroke(0, 255, 0);
@@ -55,11 +56,10 @@ class Car {
     draw() {
         push();
         translate(this.x, this.y);
-        rotate(this.angle + PI / 2);
+        rotate(this.angle);
         rectMode(CENTER);
-        noStroke();
-        fill(255, 0, 0);
-        rect(0, 0, this.width, this.height);
+        imageMode(CENTER);
+        image(atvImg, 0, 0, this.height, this.width);
         pop();
         this.update();
     }

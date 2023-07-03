@@ -30,17 +30,18 @@ class Road {
     draw() {
         let laneWidth = width / this.nLanes;
         for (let i = 0; i < this.nLanes; i++) {
-            strokeWeight(1);
+            strokeWeight(2);
             stroke(255);
+            strokeCap(SQUARE);
             line(i * laneWidth, 0, i * laneWidth, height);
-            let nSections = 15;
+            let nSections = 10;
             for (let j = this.phase % (height / nSections); j < height; j += (height / nSections)) {
                 if (i == this.currentLane) {
-                    stroke(0, 0, 255);
+                    stroke(0, 0, 255, 100);
                 } else {
                     stroke(255);
                 }
-                strokeWeight(3);
+                strokeWeight(this.getLaneWidth() / 20);
                 line(i * laneWidth + laneWidth / 2, j, i * laneWidth + laneWidth / 2, j + (height / nSections / 2));
             }
         }
