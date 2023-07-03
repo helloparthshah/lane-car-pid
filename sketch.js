@@ -18,11 +18,16 @@ var w = window.innerWidth;
 var h = window.innerHeight;
 let canvas;
 
+let atvImg;
+function preload() {
+  atvImg = loadImage("atv.png");
+}
+
 function setup() {
   pixelDensity(1);
   canvas = createCanvas(w, h);
   road = new Road(5, carSpeed);
-  car = new Car(w / 2 - 50, carSpeed, road.getLaneWidth(), road.getLaneWidth() / 2);
+  car = new Car(w / 2 - 50, carSpeed, road.getLaneWidth() / 1.2, road.getLaneWidth() / 2);
   road.setLane(width / 2);
   car.setLane(road.getLaneX());
 
